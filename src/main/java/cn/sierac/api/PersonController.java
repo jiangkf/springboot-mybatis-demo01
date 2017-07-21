@@ -1,9 +1,6 @@
 package cn.sierac.api;
 
 import cn.sierac.common.result.Result;
-import cn.sierac.entity.Person;
-import cn.sierac.service.PersonService;
-import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
