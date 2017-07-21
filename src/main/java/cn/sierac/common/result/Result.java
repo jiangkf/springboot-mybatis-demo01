@@ -39,4 +39,7 @@ public class Result {
     public void setBody(Object body) {
         this.body = body;
     }
+
+
+
 }
