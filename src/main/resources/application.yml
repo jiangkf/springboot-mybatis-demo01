@@ -19,11 +19,11 @@ mybatis:
        type-aliases-package: cn.sierac.entity
        mapper-locations: classpath:mapper/*.xml
 
-mapper:
-    mappers:
-        - cn.sierac.util.MyMapper
-    not-empty: false
-    identity: MYSQL
+#mapper:
+#    mappers:
+#        - cn.sierac.util.MyMapper
+#    not-empty: false
+#    identity: MYSQL
 
 pagehelper:
     helperDialect: mysql
