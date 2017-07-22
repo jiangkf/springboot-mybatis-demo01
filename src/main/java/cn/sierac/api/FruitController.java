@@ -1,14 +1,14 @@
 package cn.sierac.api;
 
+import cn.sierac.common.result.Result;
 import cn.sierac.entity.Fruit;
 import cn.sierac.service.FruitService;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,14 +31,14 @@ public class FruitController {
     }
 
     @PostMapping(value = "/getByShop",headers = {"Accept=application/json"})
-    public List<Fruit> getByShop(@RequestBody String JsonParam) throws IOException {
+    public Object getByShop(@RequestBody String JsonParam) throws IOException {
         JavaType javaType = getCollectionType(ArrayList.class,Fruit.class);
         List<Fruit> fruits =  objectMapper.readValue(JsonParam,javaType);
         List<Fruit> fruitList  = new ArrayList<>();
         for(Fruit fruit : fruits){
             fruitList = fruitService.getByShop(fruit.getSid());
         }
-        return fruitList;
+        return  new ResponseEntity<>(new Result(HttpStatus.OK.value(), fruitList, HttpStatus.OK), HttpStatus.OK);
     }
 
     @PostMapping(value = "/inorup",headers = {"Accept=application/json"})
@@ -61,16 +61,22 @@ public class FruitController {
                break;
            }
         }
-        return fruitService.getAll();
+        List<Fruit> fs = fruitService.getAll();
+
+        return new ResponseEntity<>(new Result(HttpStatus.OK.value(), fs, HttpStatus.OK), HttpStatus.OK);
     }
 
     @RequestMapping(value="/delete",headers = {"Accept=application/json"})
     public Object delete(@RequestBody Fruit fruit){
         fruitService.deleteFruit(fruit.getId());
-        return fruitService.getAll();
+        List<Fruit> fs = fruitService.getAll();
+        return new ResponseEntity<>(new Result(HttpStatus.OK.value(), fs, HttpStatus.OK), HttpStatus.OK);
     }
 
-
+    @RequestMapping(value="/getByShop",headers = {"Accept=application/json"})
+    public Object getByShop(@RequestBody Fruit fruit){
+        return new ResponseEntity<>(new Result(HttpStatus.OK.value(), fruitService.getByShop(fruit.getSid()), HttpStatus.OK), HttpStatus.OK);
+    }
 
 
     public static JavaType getCollectionType(Class<?> collectionClass, Class<?>... elementClasses) {
