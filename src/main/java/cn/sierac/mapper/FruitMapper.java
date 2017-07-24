@@ -20,7 +20,7 @@ public interface FruitMapper {
     public Fruit get(Integer id);
 
     //查询某个商店的水果
-    @Select("select f.id , f.type, f.price , p.sid from fruit f, shop p where f.sid = p.id and sid =#{sid}")
+    @Select("select f.id , f.type, f.price , f.sid from fruit f, shop p where f.sid = p.id and sid =#{sid}")
     public List<Fruit> getByShop(Integer sid);
 
     @Insert("insert into fruit(type,price,sid) values (#{type},#{price},#{sid})")
