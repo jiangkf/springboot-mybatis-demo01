@@ -1,7 +1,7 @@
 package cn.sierac.service;
 
 import cn.sierac.entity.Fruit;
-import cn.sierac.mapper.FruitMapper;
+import cn.sierac.mapper.FruitMapperDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,19 +14,18 @@ import java.util.List;
 public class FruitService {
 
     @Autowired
-    private FruitMapper fruitMapper;
+    private FruitMapperDao fruitMapperDao;
 
     public List<Fruit> getAll(){
-        return  fruitMapper.getAll();
+        return  fruitMapperDao.getAll();
     }
-
-    public List<Fruit> getByShop(Integer sid){return fruitMapper.getByShop(sid);}
-
-    public void insertFruit(Fruit fruit){fruitMapper.insertFruit(fruit);}
-
-    public void updateFruit(Fruit fruit){fruitMapper.updateFruit(fruit);}
-
-    public void deleteFruit(int id){fruitMapper.delete(id);}
+    public Fruit get(Integer id){
+        return  fruitMapperDao.get(id);
+    }
+    public List<Fruit> getByShop(Integer sid){return fruitMapperDao.getByShop(sid);}
+    public void insertFruit(Fruit fruit){fruitMapperDao.insert(fruit);}
+    public void updateFruit(Fruit fruit){fruitMapperDao.update(fruit);}
+    public void deleteFruit(int id){fruitMapperDao.delete(id);}
 
 
 

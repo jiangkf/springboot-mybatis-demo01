@@ -16,6 +16,7 @@ spring:
 
 
 mybatis:
+       config-location: classpath:mybatis-config.xml
        type-aliases-package: cn.sierac.entity
        mapper-locations: classpath:mapper/*.xml
 
@@ -25,16 +26,26 @@ mybatis:
 #    not-empty: false
 #    identity: MYSQL
 
-pagehelper:
-    helperDialect: mysql
-    reasonable: true
-    supportMethodsArguments: true
-    params: count=countSql
+#pagehelper:
+#    helperDialect: mysql
+#    reasonable: true
+#    supportMethodsArguments: true
+#    params: count=countSql
 
-
-
-
-
+#
+#upms:
+#  url: @upms.url@
+#  interceptor.patterns: /**/*.do,/
+#api:
+#  patterns: /jenkins/list.do,/jenkins/map.do,/jenkins/get.do,/jenkins/check.do
+#
+## Jenkins基础信息
+#jenkins:
+#  url: http://oss-jenkins.eastdc.cn:85/
+#  admin: admin
+#  pwd: admin
+#  url-part: oss-jenkins.eastdc.cn:85
+#  ossPwd: keshihua123
 
 
 

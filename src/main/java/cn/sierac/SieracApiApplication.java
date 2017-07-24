@@ -14,8 +14,6 @@ import org.springframework.context.annotation.ComponentScan;
 @MapperScan("cn.sierac.mapper")
 public class SieracApiApplication extends SpringBootServletInitializer {
 
-
-
     public static void main(String[] args) {
         SpringApplication.run(SieracApiApplication.class, args);
     }

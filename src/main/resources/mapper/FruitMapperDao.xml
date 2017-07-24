@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sierac.mapper.FruitMapperDao">
+
+	<sql id="fruitColumns">
+		a.id AS "id",
+		a.type AS "type",
+		a.price AS "price",
+		a.sid AS "sid"
+	</sql>
+
+	<sql id="joins">
+	</sql>
+
+	<select id="get" resultType="Fruit">
+		SELECT
+		<include refid="fruitColumns"/>
+		FROM fruit a
+		<include refid="joins"/>
+		<if test="id != null and id != ''">
+		WHERE a.id = #{id}
+		</if>
+	</select>
+
+	<select id="getAll" resultType="Fruit">
+		SELECT
+		<include refid="fruitColumns"/>
+			FROM fruit a
+		<include refid="joins"/>
+	</select>
+
+	<select id="getByShop" resultType="Fruit">
+		select f.type , f.price , f.sid  from fruit f, shop p
+		where f.sid = p.id and f.sid =#{f.sid}
+	</select>
+
+	<insert id="insert">
+		INSERT  into fruit (
+           type,
+           price,
+           sid
+		)VALUE (
+		   #{type},
+		   #{price},
+		   #{sid}
+		)
+	</insert>
+
+	<update id="update">
+		UPDATE fruit SET
+		type =#{type},
+		price =#{price},
+		sid = #{sid}
+		WHERE id = #{id}
+	</update>
+
+	<delete id="delete">
+		DELETE  from fruit where id =#{id}
+	</delete>
+</mapper>
