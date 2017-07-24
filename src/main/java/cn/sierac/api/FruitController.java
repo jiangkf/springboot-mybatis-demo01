@@ -46,7 +46,9 @@ public class FruitController {
 
     @RequestMapping(value="/delete",headers = {"Accept=application/json"})
     public Object delete(@RequestBody Fruit fruit){
-        fruitService.deleteFruit(fruit.getId());
+        if(fruit.getId() != null && fruit.getId() >0) {
+            fruitService.deleteFruit(fruit.getId());
+        }
         return new ResponseEntity<>(new Result(HttpStatus.OK.value(), fruitService.getAll(), HttpStatus.OK), HttpStatus.OK);
     }
 
