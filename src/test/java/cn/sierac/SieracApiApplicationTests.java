@@ -15,9 +15,6 @@ import java.util.List;
 public class SieracApiApplicationTests {
 
 	@Autowired
-	private FruitMapper fruitMapper;
-
-	@Autowired
 	private FruitMapperDao fruitMapperDao;
 
 	@Test
